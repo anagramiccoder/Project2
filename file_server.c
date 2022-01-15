@@ -32,6 +32,10 @@ int main(){
 		head=temp;
 		pthread_create(&head->id,NULL,(void *) towork,wcmd);
 	}
+	while(head!=NULL){
+	pthread_join(head->id,NULL);
+	head=head->next;
+	}
 	return 0;
 }
 
