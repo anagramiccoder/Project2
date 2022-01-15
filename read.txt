@@ -1,3 +1,7 @@
 
 read test.txt: FILE DNE
 read test2.txt: thisistest2
+read 123.txt: FILE DNE
+read 123.txt: FILE DNE
+read 123.txt: FILE DNE
+read 123.txt: FILE DNE
