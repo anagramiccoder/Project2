@@ -20,8 +20,8 @@ int main(){
 	while(1){
 		printf(">>");
 		scanf("%[^\n]%*c", command);
+		if(strcmp(command,"exit")==0){break;}
 		time(&t);
-		printf("%s %s",command,ctime(&t));
 		cmdfile=fopen("command.txt","a+");
 		fprintf(cmdfile,"%s %s",command,ctime(&t));
 		fclose(cmdfile);
@@ -32,16 +32,18 @@ int main(){
 		head=temp;
 		pthread_create(&head->id,NULL,(void *) towork,wcmd);
 	}
+	printf("waiting for all threads to finish\n");
 	while(head!=NULL){
 	pthread_join(head->id,NULL);
 	head=head->next;
 	}
+	printf("all Threads finished...\n");
 	return 0;
 }
 
 void towork(char  *cmd){
 	int del=rand()%10;
-	if(del==0 || del==1){
+	if(del==3 || del==6){
 	sleep(6);
 	}
 	else{
@@ -66,10 +68,14 @@ void toread(char *add){
 	char *input="read";
 	char data[50]="FILE DNE";
 	if(rf!=NULL){
-		fgets(data,50,rf);
+		char tempdata[50];
+		fgets(tempdata,50,rf);
 		fclose(rf);
+		strcpy(data,tempdata);
+		if(strlen(tempdata)>0){
 		int len=strlen(data);
 		data[len-1]='\0';
+		}
 	}
 	rf=fopen("read.txt","a+");
 	fprintf(rf,"%s %s: %s\n",input,add,data);
@@ -79,20 +85,28 @@ void toempty(char *add){
 	FILE *ef;
 	ef=fopen(add,"r");
 	char *input="empty";
+	int emp=0;
 	char data[50]="FILE ALREADY EMPTY";
 	if(ef!=NULL){
-		fgets(data,50,ef);
+		char tempdata[50];
+		fgets(tempdata,50,ef);
 		fclose(ef);
-		fclose(fopen(add,"w"));
+		if(strlen(tempdata)>0){
+		emp=1;
+		strcpy(data,tempdata);
 		int len=strlen(data);
 		data[len-1]='\0';
+		}
 	}
 	ef=fopen("empty.txt","a+");
 	fprintf(ef,"%s %s: %s\n",input,add,data);
 	fclose(ef);
+	if(emp==1){
+	fclose(fopen(add,"w"));
 	int delay=rand()%3001;
 	double sec=(7000+delay)/1000;
 	sleep(sec);
+	}
 }
 void towrite(char *cmd){
 	FILE *wf;
