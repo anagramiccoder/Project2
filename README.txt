@@ -13,3 +13,7 @@ after 1 or 6 second delay, will append letter per letter of the given string to 
 
 -- the empty command
 after 1 or 6 second delay, it will check if file exists using the 'r' identifier. if the file is present and has content, will save the content to empty.txt and empties the file. then wait for 7- 10 seconds. in case the file exists and does not have a content or the file does not even exist, the program will apend "FILE ALREADY EMPTY" as result in the empty.txt, and will not wait for 7-10 seconds.
+
+extra command 'exit'
+
+added an extra command so that we can wait for the threads to finish before exiting the program.
