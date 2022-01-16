@@ -119,7 +119,7 @@ void towrite(char *cmd){
 	}
 	int c=0;
 	char add[60];//create a new char
-	strncpy(add,cmd,count-1);//strncpy, max char to be read
+	strncpy(add,cmd,count);//strncpy, max char to be read
 	add[count]='\0';//change the space to null terminator
 	p++;
 	char *string=(char *)malloc(55*sizeof(char));
@@ -127,6 +127,7 @@ void towrite(char *cmd){
 	int l=strlen(string);
 	c=0;
 	string[l]='\0';
+	printf("%s\n",string);
 	wf=fopen(add,"a+");
 	while(c<l){
 		if (string[c]=='\0')
