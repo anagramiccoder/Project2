@@ -9,7 +9,8 @@ NOTE: Assumption is that if the command exists, it should contain the right argu
 read <path>
 write <path> <string>
 empty <path>
-
+--->>>>> delimiters are only one spaces 
+after 'read'<one space><path>
 
 --the read command
 after a 1 or 6 second delay, will read the contnet of the given directory. in case the file is not present will print FILE DNE as result in the read.txt file.
