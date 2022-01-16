@@ -7,3 +7,4 @@ read test2.txt:
 read test1.txt: FILE DNE
 read test3.txt: abcdef
 read test2.txt: 
+read test.txt: asdfghjl
