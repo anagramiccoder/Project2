@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include<pthread.h>
 typedef struct workerthread{
-	pthread_t id;
+	pthread_t id;//thread part
 	struct workerthread *next;
 }worker;
 time_t t;
@@ -23,17 +23,17 @@ int main(){
 		if(strcmp(command,"exit")==0){break;}
 		time(&t);//update time after getting command
 		cmdfile=fopen("command.txt","a+"); //a+ to append if file present, create if not.
-		fprintf(cmdfile,"%s %s",command,ctime(&t));
+		fprintf(cmdfile,"%s %s",command,ctime(&t));//ctime(&t) was part of the previous lab, it returns a string format of the current time recorded at time(&t)
 		fclose(cmdfile);
-		char *wcmd=(char *) malloc(150 *sizeof(char));
-		strcpy(wcmd,command);
+		char *wcmd=(char *) malloc(150 *sizeof(char));//new malloc for threading purposes.
+		strcpy(wcmd,command);//creating a new copy of the command
 		worker *temp=malloc(sizeof(worker));
 		temp->next=head;//earlier threads goes to the tail, meaning the nearer it is in the head, the more recent the thread is
 		head=temp;
 		pthread_create(&head->id,NULL,(void *) towork,wcmd);
 	}
 	printf("waiting for all threads to finish\n");
-	while(head!=NULL){
+	while(head!=NULL){//while there are other threads left
 	pthread_join(head->id,NULL);
 	head=head->next;
 	}
@@ -42,9 +42,9 @@ int main(){
 }
 
 void towork(char  *cmd){
-	int del=rand()%10;
-	if(del==3 || del==6){
-	sleep(6);
+	int del=rand()%10;//random seconds
+	if(del==5 || del==6){
+	sleep(6);//sleep is in integer, seconds
 	}
 	else{
 	sleep(1);
@@ -89,10 +89,10 @@ void toempty(char *add){
 	int emp=0;
 	char data[50]="FILE ALREADY EMPTY";
 	if(ef!=NULL){
-		char tempdata[50];
+		char tempdata[50];//temporary
 		fgets(tempdata,50,ef);
 		fclose(ef);
-		if(strlen(tempdata)>0){
+		if(strlen(tempdata)>0){//non empty file
 		emp=1;
 		strcpy(data,tempdata);
 		int len=strlen(data);
@@ -102,16 +102,16 @@ void toempty(char *add){
 	ef=fopen("empty.txt","a+");
 	fprintf(ef,"%s %s: %s\n",input,add,data);
 	fclose(ef);
-	if(emp==1){
+	if(emp==1){//file not empty, does emptying and delaying
 	fclose(fopen(add,"w"));
-	int delay=rand()%3001;
-	double sec=(7000+delay)/1000;
-	sleep(sec);
+	int delay=rand()%3001;//0-3000 increase delay
+	int sec=(7000+delay)*1000;//7s to 10 s with decimals
+	usleep(sec);
 	}
 }
 void towrite(char *cmd){
 	FILE *wf;
-	int count=0;
+	int count=0;//count until the <space>
 	char *p=cmd;
 	while(*p!=' '){//find the first iteration of <space> after the space after the 'write'
 		count+=1;
@@ -124,7 +124,7 @@ void towrite(char *cmd){
 	wf=fopen(add,"a+");
 	while(*p!='\0'){
 		fputc(*p,wf);
-		sleep(0.025);//sleep every 25 ms
+		usleep(25000);//sleep every 25 ms
 		p++;
 	}
 	fclose(wf);
