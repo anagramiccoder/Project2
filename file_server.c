@@ -118,24 +118,23 @@ void towrite(char *cmd){
 		p++;
 	}
 	int c=0;
-	char *add=(char *)malloc(60*sizeof(char));//create a new char
-	strcpy(add,cmd);
+	char add[60];//create a new char
+	strncpy(add,cmd,count-1);//strncpy, max char to be read
 	add[count]='\0';//change the space to null terminator
 	p++;
-	char *string=(char *)malloc(53*sizeof(char));
-	strcpy(string,p);
+	char *string=(char *)malloc(55*sizeof(char));
+	strncpy(string,p,50);
 	int l=strlen(string);
-	wf=fopen(add,"a+");
 	c=0;
-	string[l+1]='\0';
+	string[l]='\0';
+	wf=fopen(add,"a+");
 	while(c<l){
 		if (string[c]=='\0')
 			break;
 		fputc(string[c],wf);
-		c+=1;
+		c++;
 		usleep(25000);//sleep every  25 ms
 	}
 	fclose(wf);
-	free(add);
 	free(string);
 }
