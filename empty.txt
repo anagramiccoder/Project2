@@ -1,4 +1,0 @@
-
-empty test2.txt: thisistest2
-empty test.txt: FILE ALREADY EMPTY
-empty test2.txt: FILE ALREADY EMPT
