@@ -117,15 +117,25 @@ void towrite(char *cmd){
 		count+=1;
 		p++;
 	}
-	char add[count-1];//create a new char
+	int c=0;
+	char *add=(char *)malloc(60*sizeof(char));//create a new char
 	strcpy(add,cmd);
 	add[count]='\0';//change the space to null terminator
-	p=&cmd[count+1];//start after the detected space meaning the string
+	p++;
+	char *string=(char *)malloc(53*sizeof(char));
+	strcpy(string,p);
+	int l=strlen(string);
 	wf=fopen(add,"a+");
-	while(*p!='\0'){
-		fputc(*p,wf);
-		usleep(25000);//sleep every 25 ms
-		p++;
+	c=0;
+	string[l+1]='\0';
+	while(c<l){
+		if (string[c]=='\0')
+			break;
+		fputc(string[c],wf);
+		c+=1;
+		usleep(25000);//sleep every  25 ms
 	}
 	fclose(wf);
+	free(add);
+	free(string);
 }
