@@ -16,7 +16,7 @@ void towrite(char *cmd);
 void toempty(char *add);
 void towork(char *cmd);
 int main(){
-	worker *head=NULL;
+	worker *head=NULL;//initial worker->none
 	while(1){
 		printf(">>");
 		scanf("%[^\n]%*c", command);//scanf command which gets the input, denoted by \n on the end
