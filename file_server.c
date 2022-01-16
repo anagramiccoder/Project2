@@ -69,13 +69,13 @@ void toread(char *add){
 	char *input="read";
 	char data[50]="FILE DNE";//set default value to FILE DNE,
 	if(rf!=NULL){
-		char tempdata[50];
-		fgets(tempdata,50,rf);
+		char tempdata[52];
+		fgets(tempdata,52,rf);
 		fclose(rf);
-		strcpy(data,tempdata);
+		strncpy(data,tempdata,50);//strncpy
 		if(strlen(tempdata)>0){//check if existing file but empty content
 		int len=strlen(data);
-		data[len-1]='\0';
+		data[len]='\0';
 		}
 	}
 	rf=fopen("read.txt","a+");
@@ -89,14 +89,14 @@ void toempty(char *add){
 	int emp=0;
 	char data[50]="FILE ALREADY EMPTY";
 	if(ef!=NULL){
-		char tempdata[50];//temporary
-		fgets(tempdata,50,ef);
+		char tempdata[52];//temporary
+		fgets(tempdata,52,ef);
 		fclose(ef);
 		if(strlen(tempdata)>0){//non empty file
 		emp=1;
 		strcpy(data,tempdata);
 		int len=strlen(data);
-		data[len-1]='\0';
+		data[len]='\0';
 		}
 	}
 	ef=fopen("empty.txt","a+");
@@ -127,7 +127,6 @@ void towrite(char *cmd){
 	int l=strlen(string);
 	c=0;
 	string[l]='\0';
-	printf("%s\n",string);
 	wf=fopen(add,"a+");
 	while(c<l){
 		if (string[c]=='\0')
