@@ -7,3 +7,6 @@ write t123.txt mutlithread Sun Jan 16 14:11:47 2022
 read test1.txt Sun Jan 16 14:15:23 2022
 read test2.txt Sun Jan 16 14:15:27 2022
 read test3.txt Sun Jan 16 14:15:30 2022
+write wfilenon.txt asdfzcxvasdgdsfgfdgqwtwertxzcvzdsglkasjfladskflkad Sun Jan 16 14:42:50 2022
+empty wfilenon.txt Sun Jan 16 14:42:59 2022
+read test.txt Sun Jan 16 14:43:15 2022
