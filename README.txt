@@ -1,4 +1,5 @@
 by John David Vidad
+this code was tested on Ubuntu 14.04.1, or the default kernel from installing in Lab 0 ( not the modified kernel)
 
 code works by accepting 1 command at a time to create a thread for the command, then it will wait for another command after creating a thread for the previous command.
 It works concurrently but it does not handle sync problems or locks in general. The command input does not record \n in the input, but the "\n" serves as an identifier of the ending of a command
@@ -16,4 +17,4 @@ after 1 or 6 second delay, it will check if file exists using the 'r' identifier
 
 extra command 'exit'
 
-added an extra command so that we can wait for the threads to finish before exiting the program.
+added an extra command so that we can wait for the threads to finish before exiting the program and not abruptly end the program using ctrl +c.
