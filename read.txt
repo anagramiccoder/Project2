@@ -1,7 +1,9 @@
 
-read test.txt: FILE DNE
-read test2.txt: thisistest2
-read 123.txt: FILE DNE
-read 123.txt: FILE DNE
-read 123.txt: FILE DNE
-read 123.txt: FILE DNE
+read testdir/test2.txt: thisistest2
+read testnon.txt: FILE DNE
+read 1234.txt: FILE DNE
+read test.txt: asdfghjl
+read test2.txt: 
+read test1.txt: FILE DNE
+read test3.txt: abcdef
+read test2.txt: 
